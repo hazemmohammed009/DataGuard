@@ -89,9 +89,11 @@ fun DashboardContent(state: MainUiState.Success) {
     val chartModelProducer = remember { ChartEntryModelProducer() }
     LaunchedEffect(state) {
         chartModelProducer.setEntries(
-            entryOf(1f, state.dailyUsageBytes / (1024f * 1024f)), // in MB
-            entryOf(2f, state.weeklyUsageBytes / (1024f * 1024f)),
-            entryOf(3f, state.monthlyUsageBytes / (1024f * 1024f))
+            listOf(
+                entryOf(1f, state.dailyUsageBytes / (1024f * 1024f)), // in MB
+                entryOf(2f, state.weeklyUsageBytes / (1024f * 1024f)),
+                entryOf(3f, state.monthlyUsageBytes / (1024f * 1024f))
+            )
         )
     }
 

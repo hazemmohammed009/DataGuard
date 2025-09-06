@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -75,7 +76,7 @@ class MainViewModel(
         // Re-trigger the collection
         viewModelScope.launch {
             // A bit of a hack to re-trigger, but effective for this use case.
-            val settings = repository.settings.value
+            val settings = repository.settings.first()
             val dataLimitBytes = (settings?.dataLimitGB ?: 0f) * 1024 * 1024 * 1024
             
             val dailyUsage = fetchDataForTimeRange(TimeRange.DAILY)
